@@ -1,0 +1,12 @@
+{
+  "name": "docker-proxy",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Masamoto Miyata <miyata@sincere-co.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.4",
+    "http-proxy-middleware": "^0.19.1"
+  }
+}
