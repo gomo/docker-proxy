@@ -5,6 +5,10 @@
   "author": "Masamoto Miyata <miyata@sincere-co.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "proxy": "sudo nodemon ./proxy/app",
+    "index": "nodemon ./proxy/app"
+  },
   "dependencies": {
     "date-fns": "2.0.0-alpha.27",
     "ejs": "^2.6.1",

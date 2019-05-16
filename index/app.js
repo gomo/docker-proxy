@@ -8,8 +8,6 @@ const format = require('date-fns/format')
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, '/views'));
 
-console.log(fetchDockerContainers())
-
 const relativeFormat = new IntlRelativeFormat('ja')
 
 app.use((req, res, next) => {
