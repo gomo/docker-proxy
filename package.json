@@ -6,7 +6,10 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "date-fns": "2.0.0-alpha.27",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "http-proxy-middleware": "^0.19.1"
+    "http-proxy-middleware": "^0.19.1",
+    "intl-relativeformat": "^2.1.0"
   }
 }
