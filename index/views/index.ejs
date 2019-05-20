@@ -30,6 +30,12 @@
     </div>
   </nav>
   <div class="container">
+    <div class="mb-1 text-right">
+      <span class="mr-1 text-muted font-weight-bold">Next port:</span>
+      <% for(let port of avaiable_ports) { %>
+        <span class="badge badge-success"><%= port %></span>
+      <% } %>
+    </div>
     <div class="list-group">
       <% for (let container of containers) { %>
         <% const created_at = Date.parse(container.created_at) %>
