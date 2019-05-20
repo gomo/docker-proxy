@@ -16,8 +16,7 @@
     $(function(){
       const relative = new IntlRelativeFormat('ja')
       $.each($('.deployed_at_timer'), function(){
-        $timer = $(this)
-        const $timer = $('.deployed_at_timer')
+        const $timer = $(this)
         const deploy_at = new Date(parseInt($timer.attr('data-datetime'), 10))
         setInterval(function(){
           $timer.text(relative.format(deploy_at))
