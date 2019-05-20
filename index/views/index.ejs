@@ -14,12 +14,15 @@
   crossorigin="anonymous"></script>
   <script>
     $(function(){
-      const $timer = $('.deployed_at_timer')
-      const deploy_at = new Date(parseInt($timer.attr('data-datetime'), 10))
       const relative = new IntlRelativeFormat('ja')
-      setInterval(function(){
-        $timer.text(relative.format(deploy_at))
-      }, 1000 * 60)
+      $('.deployed_at_timer').forEach(function(){
+        $timer = $(this)
+        const $timer = $('.deployed_at_timer')
+        const deploy_at = new Date(parseInt($timer.attr('data-datetime'), 10))
+        setInterval(function(){
+          $timer.text(relative.format(deploy_at))
+        }, 1000 * 15)
+      })
     })
   </script>
 </head>
