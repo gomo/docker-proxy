@@ -6,7 +6,8 @@ app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, '/views'));
 
 const log = require('../lib/log')
-const index = require('./routes/index');
+const index = require('./routes/index')
+
 
 app.use(log)
 app.use('/docker-proxy/static', express.static(path.join(__dirname, '/public')))

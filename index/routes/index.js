@@ -3,6 +3,8 @@ const router = express.Router()
 const { fetchDockerContainers, fetchDockerContainerInfo } = require('../../lib/util')
 const IntlRelativeFormat = require('intl-relativeformat')
 const format = require('date-fns/format')
+const getDeployLog = require('../functions/getDeployLog')
+const classnames = require('classnames')
 
 const relativeFormat = new IntlRelativeFormat('ja')
 
@@ -26,7 +28,9 @@ router.get(/.*/, (req, res, next) => {
     relativeFormat: relativeFormat,
     format: format,
     fetchDockerContainerInfo: fetchDockerContainerInfo,
-    avaiable_ports: avaiable_ports
+    avaiable_ports: avaiable_ports,
+    getDeployLog: getDeployLog,
+    classnames: classnames
   })
 });
 

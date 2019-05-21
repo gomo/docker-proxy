@@ -1,0 +1,11 @@
+{
+  "default": {
+    "deploy_logs_path": ""
+  },
+  "development": {
+
+  },
+  "production": {
+    "deploy_logs_path": "/home/source/recruit-system.docker/logs"
+  }
+}

@@ -10,10 +10,12 @@
     "index": "nodemon ./index/app"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "date-fns": "2.0.0-alpha.27",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "http-proxy-middleware": "^0.19.1",
-    "intl-relativeformat": "^2.1.0"
+    "intl-relativeformat": "^2.1.0",
+    "lodash": "^4.17.11"
   }
 }

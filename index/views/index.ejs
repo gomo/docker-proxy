@@ -12,6 +12,7 @@
     src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
     crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script>
     $(function(){
       const relative = new IntlRelativeFormat('ja')
@@ -44,6 +45,7 @@
         <% const url = `http://${container.names}.172.16.14.2.xip.io/` %>
         <% const info = fetchDockerContainerInfo(container.names) %>
         <% const deployed_at = Date.parse(info.deployed_at) %>
+        <% logs = getDeployLog(container.names) %>
         <div class="list-group-item list-group-item-action">
           <div class="d-flex w-100 justify-content-between mb-3">
             <a target="_blank" href="<%= url %>" >
@@ -86,8 +88,30 @@
               </dd>
             </dl>
           </div>
-          <div class="text-right">
-            <small>Deploy at: <%= format(deployed_at, 'yyyy/M/d HH:mm:ss') %></small>
+          <div>
+            <button class="<%= classnames('btn btn-primary btn-sm', logs.some(l => l.has_error()) ? 'btn-danger' : 'btn-primary') %>" type="button" data-toggle="collapse" data-target="#logs-<%= container.names %>">
+              Deploy at: <%= format(deployed_at, 'yyyy/M/d HH:mm:ss') %>
+            </button>
+            <div class="accordion collapse my-3" id="logs-<%= container.names %>">
+              <% for (let index = 0; index < logs.length; index++) { %>
+                <% log = logs[index] %>
+                <div class="card">
+                  <div class="card-header">
+                    <a href="javascript:void(0)" class="<%= classnames('d-block', {'text-danger': log.has_error()}) %>" data-toggle="collapse" data-target="#log-<%= index %>" aria-expanded="true" aria-controls="collapseOne">
+                      <%= log.title %>
+                    </a>
+                  </div>
+                  <div id="log-<%= index %>" class="<%= classnames('collapse', {'show': log.has_error()}) %>" data-parent="#logs-<%= container.names %>">
+                    <div class="card-body">
+                      <pre>
+                        <%= log.body %>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+            </div>
+            
           </div>
           <div class="text-right">
             <small>Docker run at: <%= format(created_at, 'yyyy/M/d HH:mm:ss') %></small>
