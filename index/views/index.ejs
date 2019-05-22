@@ -9,8 +9,8 @@
   <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
   <script src="/docker-proxy/static/js/intl-relativeformat.js"></script>
   <script
-    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script>
@@ -23,6 +23,20 @@
           $timer.text(relative.format(deploy_at))
         }, 1000 * 15)
       })
+    })
+  </script>
+  <script>
+    $(function(){
+      $containers = $('.js-containers')
+      $.ajax('/docker-proxy/ajax/deploy_info', {data: {names: $containers.data('names')}}).then(function(data){
+        console.log(data)
+      })
+      // $.each($('.js-containers'), function(){
+      //   const $container = $(this)
+      //   const name = $container.attr('data-container-name')
+      //   console.log(name)
+      // })
+      // $.ajax()
     })
   </script>
 </head>
@@ -39,14 +53,14 @@
         <span class="badge badge-success"><%= port %></span>
       <% } %>
     </div>
-    <div class="list-group">
+    <div class="list-group js-containers" data-names="<%= containers.map(c => c.names).join(',') %>">
       <% for (let container of containers) { %>
         <% const created_at = Date.parse(container.created_at) %>
         <% const url = `http://${container.names}.172.16.14.2.xip.io/` %>
         <% const info = fetchDockerContainerInfo(container.names) %>
         <% const deployed_at = Date.parse(info.deployed_at) %>
         <% logs = getDeployLog(container.names) %>
-        <div class="list-group-item list-group-item-action">
+        <div class="js-container list-group-item list-group-item-action" data-name="<%= container.names %>">
           <div class="d-flex w-100 justify-content-between mb-3">
             <a target="_blank" href="<%= url %>" >
               <h1 class="h3 mb-1"><i class="fas fa-box"></i> <%= container.names %></h1>
@@ -103,7 +117,7 @@
                   </div>
                   <div id="log-<%= index %>" class="<%= classnames('collapse', {'show': log.has_error()}) %>" data-parent="#logs-<%= container.names %>">
                     <div class="card-body">
-                      <pre>
+                      <pre class="m-0">
                         <%= log.body %>
                       </pre>
                     </div>

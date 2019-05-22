@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const config = require(`../configs/${process.env.USER}`)
 const fs = require("fs")
 
@@ -6,7 +5,7 @@ class DeployLog {
   constructor(log_text){
     const chunks = log_text.split("\n")
     this.title = chunks.shift()
-    this.body = chunks.join("\n")
+    this.body = chunks.join("\n").replace(/^\s+|\s+$/g, '')
   }
 
   has_error(){

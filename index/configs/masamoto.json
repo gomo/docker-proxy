@@ -1,3 +1,4 @@
 {
-  "deploy_logs_path": "/Users/masamoto/Documents/repos/home/source/sites/recruit-system.docker/logs"
+  "deploy_logs_path": "/Users/masamoto/Documents/repos/home/source/sites/recruit-system.docker/logs",
+  "deploy_pids_path": "/Users/masamoto/Documents/repos/home/source/sites/recruit-system.docker/pids"
 }

@@ -5,6 +5,8 @@ const IntlRelativeFormat = require('intl-relativeformat')
 const format = require('date-fns/format')
 const getDeployLog = require('../functions/getDeployLog')
 const classnames = require('classnames')
+// const config = require(`../configs/${process.env.USER}`)
+// const fs = require("fs")
 
 const relativeFormat = new IntlRelativeFormat('ja')
 
@@ -14,6 +16,11 @@ router.get(/.*/, (req, res, next) => {
   const using_ports = containers.map(c => parseInt(c.http_port, 10))
   const avaiable_ports = []
   let port = Math.min.apply(null, using_ports)
+
+  // containers.forEach(container => {
+  //   const pid_path = `${config.deploy_pids_path}/${container.names}.log`
+  //   container.is_running = fs.existsSync(pid_path)
+  // })
 
   while(true){
     ++port//Math.minで取ってるので最初のは必ず使用中

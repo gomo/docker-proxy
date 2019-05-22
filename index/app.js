@@ -5,12 +5,14 @@ const app = express();
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, '/views'));
 
-const log = require('../lib/log')
-const index = require('./routes/index')
-
-
-app.use(log)
+// app.use(require('../lib/log'))
 app.use('/docker-proxy/static', express.static(path.join(__dirname, '/public')))
-app.use(index)
+
+const pages = [
+  'ajax/deploy_info'
+]
+
+pages.forEach(page => app.use(`/docker-proxy/${page}`, require(`./routes/${page}`)))
+app.use(require('./routes/index'))
 
 app.listen(8080)

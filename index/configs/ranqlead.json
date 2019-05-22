@@ -1,3 +1,4 @@
 {
-  "deploy_logs_path": "/home/source/recruit-system.docker/logs"
+  "deploy_logs_path": "/home/source/recruit-system.docker/logs",
+  "deploy_pids_path": "/home/source/recruit-system.docker/pids"
 }
