@@ -25,20 +25,6 @@
       })
     })
   </script>
-  <script>
-    $(function(){
-      $containers = $('.js-containers')
-      $.ajax('/docker-proxy/ajax/deploy_info', {data: {names: $containers.data('names')}}).then(function(data){
-        console.log(data)
-      })
-      // $.each($('.js-containers'), function(){
-      //   const $container = $(this)
-      //   const name = $container.attr('data-container-name')
-      //   console.log(name)
-      // })
-      // $.ajax()
-    })
-  </script>
 </head>
 <body>
   <nav class="navbar navbar-dark bg-dark mb-5">
@@ -103,8 +89,20 @@
             </dl>
           </div>
           <div>
-            <button class="<%= classnames('btn btn-primary btn-sm', logs.some(l => l.has_error()) ? 'btn-danger' : 'btn-primary') %>" type="button" data-toggle="collapse" data-target="#logs-<%= container.names %>">
-              Deploy at: <%= format(deployed_at, 'yyyy/M/d HH:mm:ss') %>
+            <%
+              var classname = 'btn-success'
+              if(container.is_running){
+                classname = 'btn-warning'
+              } else if(logs.some(l => l.has_error())) {
+                classname = 'btn-danger'
+              }
+            %>
+            <button class="<%= classnames('btn btn-primary btn-sm', classname) %>" type="button" data-toggle="collapse" data-target="#logs-<%= container.names %>">
+              <% if (container.is_running) { %>
+                Deploying:  <%= format(container.deploy_start_at, 'yyyy/M/d HH:mm:ss') %>
+              <% } else { %>
+                Deploy at: <%= format(deployed_at, 'yyyy/M/d HH:mm:ss') %>
+              <% } %>
             </button>
             <div class="accordion collapse my-3" id="logs-<%= container.names %>">
               <% for (let index = 0; index < logs.length; index++) { %>
@@ -117,9 +115,7 @@
                   </div>
                   <div id="log-<%= index %>" class="<%= classnames('collapse', {'show': log.has_error()}) %>" data-parent="#logs-<%= container.names %>">
                     <div class="card-body">
-                      <pre class="m-0">
-                        <%= log.body %>
-                      </pre>
+                      <pre class="m-0"><%= log.body %></pre>
                     </div>
                   </div>
                 </div>

@@ -9,7 +9,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.use('/docker-proxy/static', express.static(path.join(__dirname, '/public')))
 
 const pages = [
-  'ajax/deploy_info'
+
 ]
 
 pages.forEach(page => app.use(`/docker-proxy/${page}`, require(`./routes/${page}`)))
