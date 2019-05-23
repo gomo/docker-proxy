@@ -15,7 +15,7 @@ class DeployLog {
 
 module.exports = (container_name) => {
   const logs = []
-  const log_path = `${config.deploy_logs_path}/${container_name}.log`
+  const log_path = `${config.deploy_logs_path}/deploy@${container_name}.log`
   if(fs.existsSync(log_path)){
     fs.readFileSync(log_path, 'utf8').replace(/^\s+|\s+$/g, '').split("=============================================\n").filter(b => b !== '').forEach(block => {
       logs.push(new DeployLog(block))

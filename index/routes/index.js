@@ -20,7 +20,7 @@ router.get(/.*/, (req, res, next) => {
   containers.forEach(container => {
     container.is_running = false
 
-    const pid_path = `${config.deploy_pids_path}/${container.names}.pid`
+    const pid_path = `${config.deploy_pids_path}/deploy@${container.names}.pid`
     if(fs.existsSync(pid_path)){
       const stat = fs.statSync(pid_path)
       container.deploy_start_at = Date.parse(stat.ctime)
