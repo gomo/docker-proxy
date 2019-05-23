@@ -43,7 +43,8 @@ router.get(/.*/, (req, res, next) => {
     fetchDockerContainerInfo: fetchDockerContainerInfo,
     avaiable_ports: avaiable_ports,
     getDeployLog: getDeployLog,
-    classnames: classnames
+    classnames: classnames,
+    request_path: req.url
   })
 });
 
