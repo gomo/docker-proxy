@@ -9,7 +9,9 @@ class DeployLog {
   }
 
   has_error(){
-    return this.body.indexOf('Deploy failed:') >= 0
+    // メモリ不足でプロセスを強制終了すると`/root/deploy.bash: line 49:  4724 Killed`の様なログが出力されます。
+    // https://unix.stackexchange.com/questions/184371/what-does-line-19-12364-killed-mean-in-crontab-error-message
+    return this.body.indexOf('Deploy failed:') >= 0 || this.body.match(/\/root\/deploy\.bash: *line *[0-9]+: *[0-9]+ *Killed/)
   }
 }
 
