@@ -21,3 +21,11 @@ http://container_name.10.0.0.2.xip.io/
 
 
 
+## 起動コマンド
+
+```
+pm2 start --name DockerProxy  /home/source/docker-proxy/proxy/app.js
+pm2 start --name DockerIndex  /home/source/docker-proxy/index/app.js
+```
+
+DockerIndexの方は80で待ち受けるのでrootじゃないと出来ないようです。DockerProxyの方は8080なのでrootじゃなくてもOKです。
