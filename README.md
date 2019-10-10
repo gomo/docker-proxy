@@ -4,7 +4,7 @@
 
 ローカルサーバーで起動しているDockerのコンテナにアクセスを振り分けるプロキシです。
 
-http://xip.io/
+http://nip.io/
 
 このDNSサービスの利用を想定ます。
 
@@ -12,12 +12,12 @@ http://xip.io/
 
 `10.0.0.2`でdocker_proxyサーバーを起動し
 
-http://container_name.10.0.0.2.xip.io/
+http://container_name.10.0.0.2.nip.io/
 
 へアクセスすると`http://127.0.0.1:4000`にアクセスが転送され`container_name`のサイトが表示されます。
 
 
-`http://10.0.0.2.xip.io`では起動しているコンテナのリストも参照可能です。
+`http://10.0.0.2.nip.io`では起動しているコンテナのリストも参照可能です。
 
 
 

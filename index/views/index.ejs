@@ -46,7 +46,7 @@
     <div class="list-group js-containers" data-names="<%= containers.map(c => c.names).join(',') %>">
       <% for (let container of containers) { %>
         <% const created_at = Date.parse(container.created_at) %>
-        <% const url = `http://${container.names}.172.16.14.2.xip.io` %>
+        <% const url = `http://${container.names}.172.16.14.2.nip.io` %>
         <% const info = fetchDockerContainerInfo(container.names) %>
         <% const deployed_at = Date.parse(info.deployed_at) %>
         <% logs = getDeployLog(container.names) %>
